@@ -22,8 +22,6 @@
 </template>
 
 <script>
-import LastModal from '../last-modal'
-
 export default {
   name: "modal-layout",
 
@@ -73,7 +71,7 @@ export default {
 
   methods: {
     close() {
-      LastModal.bus.$emit("closeTop");
+      this.$root.$emit("LastModal.closeTop");
     }
   }
 };

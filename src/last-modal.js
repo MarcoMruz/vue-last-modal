@@ -17,38 +17,35 @@ const LastModal = {
       return
     }
 
-    config = Object.assign({}, defaultConfig, config)
-
     this.installed = true
-    this.bus = new Vue()
+
+    config = Object.assign({}, defaultConfig, config)
 
     Vue.component(ModalLayout.name, ModalLayout)
 
-    const initModalStackContainer = (parent) => {
-      if (!this.container) {
-        this.container = document.createElement('div')
-        document.body.appendChild(this.container)
+    const createModalStackContainer = (parent) => {
+      const placeholder = document.createElement('div')
+      document.body.appendChild(placeholder)
 
-        new Vue({
-          parent,
-          render: h => h(ModalStack, { props: { config } })
-        }).$mount(this.container)
+      return new Vue({ parent, render: h => h(ModalStack, { props: { config } }) })
+        .$mount(placeholder)
+    }
+
+    const getModalStackComponent = (parent) => {
+      if (!this.container) {
+        this.container = createModalStackContainer(parent)
       }
 
-      return this.container
+      return this.container.$children[0]
     }
 
     Vue.prototype.$modal = function(component, props = {}, inline = false) {
-      initModalStackContainer(this.$root)
-
-      return new Promise(resolve => {
-        LastModal.bus.$emit("open", {
-          component,
-          props,
-          resolve,
-          inline
-        })
-      });
+      return new Promise(resolve => getModalStackComponent(this.$root).open({
+        component,
+        props,
+        resolve,
+        inline
+      }));
     };
 
     Vue.prototype.$dialog = function({title, message, buttons}) {

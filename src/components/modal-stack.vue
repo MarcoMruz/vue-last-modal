@@ -1,27 +1,25 @@
 <template>
-    <div class="ModalStack">
-      <transition :name="config.backdropTransitionName">
-        <div class="ModalStack__backdrop" v-if="modals.length" />
-      </transition>
+  <div class="ModalStack">
+    <transition :name="config.backdropTransitionName">
+      <div class="ModalStack__backdrop" v-if="modals.length" />
+    </transition>
 
-      <transition-group :name="config.modalTransitionName">
-        <div v-for="modal in modals" class="ModalStack__modalWrapper" :key="modal.id" @click="closeByBackdropClick($event, modal)">
-          <component
-            class="ModalStack__modal"
-            v-bind="modal.props"
-            :is="modal.component"
-            :class="{isTop: topModal.id === modal.id}"
-            :ref="`modal_${modal.id}`"
-            @close="close(modal, $event)"
-          />
-        </div>
-      </transition-group>
-    </div>
+    <transition-group :name="config.modalTransitionName">
+      <div v-for="modal in modals" class="ModalStack__modalWrapper" :key="modal.id" @click="closeByBackdropClick($event, modal)">
+        <component
+          class="ModalStack__modal"
+          v-bind="modal.props"
+          :is="modal.component"
+          :class="{isTop: topModal.id === modal.id}"
+          :ref="`modal_${modal.id}`"
+          @close="close(modal, $event)"
+        />
+      </div>
+    </transition-group>
+  </div>
 </template>
 
 <script>
-import LastModal from '../last-modal'
-
 export default {
   name: "modal-stack",
 
@@ -98,18 +96,18 @@ export default {
     document.body.appendChild(this.$el)
     document.addEventListener("keydown", this.closeByEscKey)
 
-    LastModal.bus.$on("open", this.open)
-    LastModal.bus.$on("close", this.close)
-    LastModal.bus.$on("closeTop", this.closeTop)
+    this.$root.$on("LastModal.open", this.open)
+    this.$root.$on("LastModal.close", this.close)
+    this.$root.$on("LastModal.closeTop", this.closeTop)
   },
 
   destroyed() {
     document.body.removeChild(this.$el)
     document.removeEventListener("keydown", this.closeByEscKey)
 
-    LastModal.bus.$off("open", this.open)
-    LastModal.bus.$off("close", this.close)
-    LastModal.bus.$off("closeTop", this.closeTop)
+    this.$root.$off("LastModal.open", this.open)
+    this.$root.$off("LastModal.close", this.close)
+    this.$root.$off("LastModal.closeTop", this.closeTop)
   }
 }
 </script>
