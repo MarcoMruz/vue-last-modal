@@ -29,18 +29,14 @@
 </template>
 
 <script>
-const MyModal = {
-  template: `
-    <modal-layout>
-      Hello there!
-    </modal-layout>
-  `
-}
+import BasicModal from './modals/BasicModal'
+import PlainModal from './modals/PlainModal'
+import ScrollableModal from './modals/ScrollableModal'
 
 export default {
   methods: {
     open() {
-      this.$modal(MyModal)
+      this.$modal(BasicModal)
     },
 
     alert() {
@@ -52,30 +48,11 @@ export default {
     },
 
     openPlain() {
-      this.$modal({
-        template: `
-          <modal-layout plain width="auto" hide-closer>
-            Content with no paddings
-          </modal-layout>
-        `
-      })
+      this.$modal(PlainModal)
     },
 
     openScrollable() {
-      this.$modal({
-        template: `
-          <modal-layout title="A modal with scrollable text" width="850" scroll closer>
-            <span v-for="i in Array.from({length: 30})" :key="i">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-              tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-              quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-              consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-              cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-              proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </span>
-          </modal-layout>
-        `
-      })
+      this.$modal(ScrollableModal)
     }
   }
 };
