@@ -1,7 +1,5 @@
 <template>
-  <modal-layout>
-    Hello there!
-  </modal-layout>
+  <modal-layout> Hello there! </modal-layout>
 </template>
 
 <script lang="ts">

@@ -1,93 +1,96 @@
 <template>
-    <div class="ModalLayout" :class="{ hasHeader, hasFooter, isScrollable, isPlain }" :style="computedStyle">
-      <div class="ModalLayout__close" @click="close()" v-if="!hideCloser">
-      </div>
+  <div
+    class="ModalLayout"
+    :class="{ hasHeader, hasFooter, isScrollable, isPlain }"
+    :style="computedStyle"
+  >
+    <div class="ModalLayout__close" @click="close()" v-if="!hideCloser"></div>
 
-      <div class="ModalLayout__header" v-if="hasHeader">
-          <slot name="header">
-            <div class="ModalLayout__title">
-              {{ title }}
-            </div>
-          </slot>
-      </div>
-
-      <div class="ModalLayout__body">
-          <slot />
-      </div>
-
-      <div class="ModalLayout__footer" v-if="hasFooter">
-          <slot name="footer" />
-      </div>
+    <div class="ModalLayout__header" v-if="hasHeader">
+      <slot name="header">
+        <div class="ModalLayout__title">
+          {{ title }}
+        </div>
+      </slot>
     </div>
+
+    <div class="ModalLayout__body">
+      <slot />
+    </div>
+
+    <div class="ModalLayout__footer" v-if="hasFooter">
+      <slot name="footer" />
+    </div>
+  </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: "modal-layout",
+  name: 'modal-layout',
 
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
 
     hideCloser: {
-      type: Boolean
+      type: Boolean,
     },
 
     scroll: {
-      type: Boolean
+      type: Boolean,
     },
 
     plain: {
-      type: Boolean
+      type: Boolean,
     },
 
     width: {
       type: [Number, String],
-      default: 600
-    }
+      default: 600,
+    },
   },
 
   computed: {
     isScrollable(): boolean {
-      return this.scroll;
+      return this.scroll
     },
 
     isPlain(): boolean {
-      return this.plain;
+      return this.plain
     },
 
     hasHeader(): boolean {
-      return Boolean(this.$slots.header || this.title);
+      return Boolean(this.$slots.header || this.title)
     },
 
     hasFooter(): boolean {
-      return Boolean(this.$slots.footer);
+      return Boolean(this.$slots.footer)
     },
 
-    computedStyle(): object {
-      const maxWidth = this.width + (Number(this.width) ? 'px' : '');
+    computedStyle(): Partial<CSSStyleDeclaration> {
+      const maxWidth = this.width + (Number(this.width) ? 'px' : '')
 
       if (maxWidth && maxWidth !== 'auto') {
         return {
           width: '100%',
-          maxWidth
-        };
+          maxWidth,
+        }
       }
 
       return {}
-    }
+    },
   },
 
   methods: {
     close() {
-      this.$root.$emit('LastModal.closeTop');
-    }
-  }
-});
+      this.$root.$emit('LastModal.closeTop')
+    },
+  },
+})
 </script>
 
 <style lang="postcss">
@@ -140,7 +143,7 @@ export default Vue.extend({
   opacity: 0.4;
 
   &::before {
-    content: "\00d7";
+    content: '\00d7';
 
     transform: translateY(-0.15rem);
   }

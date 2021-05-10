@@ -1,9 +1,9 @@
-import Vue, { Component, PluginObject } from 'vue';
+import Vue, { Component, PluginObject, PropOptions } from 'vue'
 
 export type Modal = {
   component: Component
-  props?: object
-  resolve: (result: any) => void
+  props?: PropOptions
+  resolve: (result: unknown) => never
 }
 
 export type ModalRecord = Modal & {
@@ -22,7 +22,7 @@ export type Config = Partial<{
 export type Button = {
   className?: string
   label: string
-  value?: any
+  value?: unknown
 }
 
 export type DialogOptions = {
@@ -31,38 +31,46 @@ export type DialogOptions = {
   buttons?: Button[]
 }
 
-export type AlertOptions = string | {
-  title?: string
-  message: string
-  confirmLabel?: string
-}
+export type AlertOptions =
+  | string
+  | {
+      title?: string
+      message: string
+      confirmLabel?: string
+    }
 
-export type ConfirmOptions = string | {
-  title?: string
-  message: string
-  cancelLabel?: string
-  confirmLabel?: string
-}
+export type ConfirmOptions =
+  | string
+  | {
+      title?: string
+      message: string
+      cancelLabel?: string
+      confirmLabel?: string
+    }
 
-export interface OpenModalInterface  {
-  <T = any>(this: Vue, component: any, props?: object): Promise<T>
+export interface OpenModalInterface {
+  <T = unknown>(
+    this: Vue,
+    component: Component,
+    props?: { [key: string]: unknown }
+  ): Promise<T>
 }
 
 export interface OpenDialogInterface extends Vue {
-  <T = any>(this: Vue, options: DialogOptions): Promise<T>
+  <T = unknown>(this: Vue, options: DialogOptions): Promise<T>
 }
 
 export interface OpenAlertInterface extends Vue {
-  <T = any>(this: Vue, options: AlertOptions): Promise<T>
+  <T = unknown>(this: Vue, options: AlertOptions): Promise<T>
 }
 
 export interface OpenConfirmInterface extends Vue {
-  <T = any>(this: Vue, options: ConfirmOptions): Promise<T>
+  <T = unknown>(this: Vue, options: ConfirmOptions): Promise<T>
 }
 
 export declare const VueLastModal: PluginObject<Config>
 
-export default VueLastModal;
+export default VueLastModal
 
 declare module 'vue/types/vue' {
   interface Vue {

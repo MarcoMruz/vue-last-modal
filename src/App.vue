@@ -5,21 +5,13 @@
         <h1>Last Modal</h1>
       </div>
 
-      <button class="btn btn-secondary" @click="open()">
-        Open
-      </button>
+      <button class="btn btn-secondary" @click="open()">Open</button>
 
-      <button class="btn btn-secondary" @click="openPlain()">
-        Open plain
-      </button>
+      <button class="btn btn-secondary" @click="openPlain()">Open plain</button>
 
-      <button class="btn btn-secondary" @click="alert()">
-        Alert
-      </button>
+      <button class="btn btn-secondary" @click="alert()">Alert</button>
 
-      <button class="btn btn-secondary" @click="confirm()">
-        Confirm
-      </button>
+      <button class="btn btn-secondary" @click="confirm()">Confirm</button>
 
       <button class="btn btn-secondary" @click="openScrollable()">
         Open scrollable
@@ -29,7 +21,7 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from 'vue'
 
 import BasicModal from './modals/BasicModal.vue'
 import PlainModal from './modals/PlainModal.vue'
@@ -42,7 +34,7 @@ export default Vue.extend({
     },
 
     alert() {
-      this.$alert({title: 'Alert!', message: 'Now panic and freak out!'})
+      this.$alert({ title: 'Alert!', message: 'Now panic and freak out!' })
     },
 
     confirm() {
@@ -55,14 +47,13 @@ export default Vue.extend({
 
     openScrollable() {
       this.$modal(ScrollableModal)
-    }
-  }
-});
+    },
+  },
+})
 </script>
 
 <style lang="postcss">
-  .btn + .btn {
-    margin-left: .5rem;
-  }
+.btn + .btn {
+  margin-left: 0.5rem;
+}
 </style>
-

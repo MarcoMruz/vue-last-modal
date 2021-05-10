@@ -4,8 +4,16 @@
 
     <template slot="footer" v-if="buttons && buttons.length">
       <div class="ModalLayoutDialog__buttons">
-        <span class="ModalLayoutDialog__buttonWrapper" v-for="(button, $index) in buttons" :key="$index">
-          <button type="button" :class="button.className" @click="$emit('close', button.value)" >
+        <span
+          class="ModalLayoutDialog__buttonWrapper"
+          v-for="(button, $index) in buttons"
+          :key="$index"
+        >
+          <button
+            type="button"
+            :class="button.className"
+            @click="$emit('close', button.value)"
+          >
             {{ button.label }}
           </button>
         </span>
@@ -23,17 +31,17 @@ export default Vue.extend({
   props: {
     title: {
       type: String,
-      default: ''
+      default: '',
     },
 
     message: {
       type: String,
-      default: ''
+      default: '',
     },
 
     buttons: {
-      type: Array as PropType<Button[]>
-    }
+      type: Array as PropType<Button[]>,
+    },
   },
 
   mounted() {
@@ -42,7 +50,7 @@ export default Vue.extend({
     if (buttons.length) {
       buttons[buttons.length - 1].focus()
     }
-  }
+  },
 })
 </script>
 
@@ -52,9 +60,7 @@ export default Vue.extend({
   margin-top: 1rem;
 
   & > * + * {
-    margin-left: .5rem;
+    margin-left: 0.5rem;
   }
 }
 </style>
-
-

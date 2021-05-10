@@ -5,12 +5,17 @@
     </transition>
 
     <transition-group :name="config.modalTransitionName">
-      <div v-for="modal in modals" class="ModalStack__modalWrapper" :key="modal.id" @click="closeByBackdropClick($event, modal)">
+      <div
+        v-for="modal in modals"
+        class="ModalStack__modalWrapper"
+        :key="modal.id"
+        @click="closeByBackdropClick($event, modal)"
+      >
         <component
           class="ModalStack__modal"
           v-bind="modal.props"
           :is="modal.component"
-          :class="{isTop: topModal.id === modal.id}"
+          :class="{ isTop: topModal.id === modal.id }"
           :ref="`modal_${modal.id}`"
           @close="close(modal, $event)"
         />
@@ -21,46 +26,48 @@
 
 <script lang="ts">
 import Vue from 'vue'
+
 import { Modal, ModalRecord } from 'types'
 
 export default Vue.extend({
-  name: "modal-stack",
+  name: 'modal-stack',
 
   props: {
     config: {
-      type: Object
-    }
+      type: Object,
+    },
   },
 
   data() {
     return {
       sequence: 1 as number,
-      modals: [] as ModalRecord[]
+      modals: [] as ModalRecord[],
     }
   },
 
   computed: {
     topModal(): ModalRecord | null {
       return this.modals.length ? this.modals[this.modals.length - 1] : null
-    }
+    },
   },
 
   methods: {
     open(modal: Modal) {
-      (document.activeElement as HTMLElement)?.blur()
+      ;(document.activeElement as HTMLElement)?.blur()
 
       this.modals.push({
-        ...modal, id: this.sequence++
+        ...modal,
+        id: this.sequence++,
       })
     },
 
-    close(modal: ModalRecord, result: any = undefined) {
-      if (!this.modals.find(({id}) => id === modal.id)) {
+    close(modal: ModalRecord, result: unknown = undefined) {
+      if (!this.modals.find(({ id }) => id === modal.id)) {
         return
       }
 
       const closingRoutine = () => {
-        this.modals = this.modals.filter(({id}) => id !== modal.id)
+        this.modals = this.modals.filter(({ id }) => id !== modal.id)
         modal && modal.resolve(result)
       }
 
@@ -80,7 +87,7 @@ export default Vue.extend({
     },
 
     closeByEscKey(e: KeyboardEvent) {
-      if (this.topModal && e.key === "Escape" && !e.defaultPrevented) {
+      if (this.topModal && e.key === 'Escape' && !e.defaultPrevented) {
         e.preventDefault()
         this.closeTop()
       }
@@ -93,27 +100,27 @@ export default Vue.extend({
     },
 
     _getModalInstance(modal: ModalRecord) {
-      return (this.$refs[`modal_${modal.id}`] as any) [0].$children[0]
-    }
+      return (this.$refs[`modal_${modal.id}`] as Vue[])[0].$children[0]
+    },
   },
 
   mounted() {
     document.body.appendChild(this.$el)
-    document.addEventListener("keydown", this.closeByEscKey)
+    document.addEventListener('keydown', this.closeByEscKey)
 
-    this.$root.$on("LastModal.open", this.open)
-    this.$root.$on("LastModal.close", this.close)
-    this.$root.$on("LastModal.closeTop", this.closeTop)
+    this.$root.$on('LastModal.open', this.open)
+    this.$root.$on('LastModal.close', this.close)
+    this.$root.$on('LastModal.closeTop', this.closeTop)
   },
 
   destroyed() {
     document.body.removeChild(this.$el)
-    document.removeEventListener("keydown", this.closeByEscKey)
+    document.removeEventListener('keydown', this.closeByEscKey)
 
-    this.$root.$off("LastModal.open", this.open)
-    this.$root.$off("LastModal.close", this.close)
-    this.$root.$off("LastModal.closeTop", this.closeTop)
-  }
+    this.$root.$off('LastModal.open', this.open)
+    this.$root.$off('LastModal.close', this.close)
+    this.$root.$off('LastModal.closeTop', this.closeTop)
+  },
 })
 </script>
 
@@ -162,7 +169,7 @@ export default Vue.extend({
 }
 
 .ModalStack__modal {
-  transition: filter .15s;
+  transition: filter 0.15s;
 
   &:not(.isTop) {
     filter: brightness(80%);
