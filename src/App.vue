@@ -47,8 +47,8 @@ export default Vue.extend({
 
     openScrollable() {
       this.$modal(ScrollableModal)
-    },
-  },
+    }
+  }
 })
 </script>
 
