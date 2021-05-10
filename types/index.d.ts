@@ -3,7 +3,7 @@ import Vue, { Component, PluginObject, PropOptions } from 'vue'
 export type Modal = {
   component: Component
   props?: PropOptions
-  resolve: (result: unknown) => never
+  resolve: (result: any) => never
 }
 
 export type ModalRecord = Modal & {
@@ -22,7 +22,7 @@ export type Config = Partial<{
 export type Button = {
   className?: string
   label: string
-  value?: unknown
+  value?: any
 }
 
 export type DialogOptions = {
@@ -49,23 +49,23 @@ export type ConfirmOptions =
     }
 
 export interface OpenModalInterface {
-  <T = unknown>(
+  <T = any>(
     this: Vue,
     component: Component,
-    props?: { [key: string]: unknown }
+    props?: { [key: string]: any }
   ): Promise<T>
 }
 
 export interface OpenDialogInterface extends Vue {
-  <T = unknown>(this: Vue, options: DialogOptions): Promise<T>
+  <T = any>(this: Vue, options: DialogOptions): Promise<T>
 }
 
 export interface OpenAlertInterface extends Vue {
-  <T = unknown>(this: Vue, options: AlertOptions): Promise<T>
+  (this: Vue, options: AlertOptions): Promise<void>
 }
 
 export interface OpenConfirmInterface extends Vue {
-  <T = unknown>(this: Vue, options: ConfirmOptions): Promise<T>
+  (this: Vue, options: ConfirmOptions): Promise<boolean>
 }
 
 export declare const VueLastModal: PluginObject<Config>

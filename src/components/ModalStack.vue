@@ -61,7 +61,7 @@ export default Vue.extend({
       })
     },
 
-    close(modal: ModalRecord, result: unknown = undefined) {
+    close(modal: ModalRecord, result: any = undefined) {
       if (!this.modals.find(({ id }) => id === modal.id)) {
         return
       }
