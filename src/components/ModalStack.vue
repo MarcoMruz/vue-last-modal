@@ -34,21 +34,21 @@ export default Vue.extend({
 
   props: {
     config: {
-      type: Object,
-    },
+      type: Object
+    }
   },
 
   data() {
     return {
       sequence: 1 as number,
-      modals: [] as ModalRecord[],
+      modals: [] as ModalRecord[]
     }
   },
 
   computed: {
     topModal(): ModalRecord | null {
       return this.modals.length ? this.modals[this.modals.length - 1] : null
-    },
+    }
   },
 
   methods: {
@@ -57,7 +57,7 @@ export default Vue.extend({
 
       this.modals.push({
         ...modal,
-        id: this.sequence++,
+        id: this.sequence++
       })
     },
 
@@ -101,7 +101,7 @@ export default Vue.extend({
 
     _getModalInstance(modal: ModalRecord) {
       return (this.$refs[`modal_${modal.id}`] as Vue[])[0].$children[0]
-    },
+    }
   },
 
   mounted() {
@@ -120,7 +120,7 @@ export default Vue.extend({
     this.$root.$off('LastModal.open', this.open)
     this.$root.$off('LastModal.close', this.close)
     this.$root.$off('LastModal.closeTop', this.closeTop)
-  },
+  }
 })
 </script>
 

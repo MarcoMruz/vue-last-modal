@@ -10,7 +10,7 @@ import {
   OpenConfirmInterface,
   OpenDialogInterface,
   OpenModalInterface,
-  VueLastModal,
+  VueLastModal
 } from 'types'
 
 const defaultConfig: Config = {
@@ -19,7 +19,7 @@ const defaultConfig: Config = {
   buttonClassName: 'btn btn-secondary',
   primaryButtonClassName: 'btn btn-primary',
   backdropTransitionName: 'ModalStack__backdrop',
-  modalTransitionName: 'ModalStack__modal',
+  modalTransitionName: 'ModalStack__modal'
 }
 
 const vueLaslModal: typeof VueLastModal = {
@@ -44,7 +44,7 @@ const vueLaslModal: typeof VueLastModal = {
 
       return new Vue({
         parent,
-        render: (h) => h(ModalStack, { props: { config } }),
+        render: (h) => h(ModalStack, { props: { config } })
       }).$mount(placeholder)
     }
 
@@ -61,7 +61,7 @@ const vueLaslModal: typeof VueLastModal = {
         getModalStackComponent(this.$root).open({
           component,
           props,
-          resolve,
+          resolve
         })
       )
     } as OpenModalInterface
@@ -70,14 +70,14 @@ const vueLaslModal: typeof VueLastModal = {
       return this.$modal(ModalLayoutDialog, {
         title,
         message,
-        buttons,
+        buttons
       })
     } as OpenDialogInterface
 
     Vue.prototype.$alert = function (options: AlertOptions) {
       if (typeof options === 'string') {
         options = {
-          message: options,
+          message: options
         }
       }
 
@@ -89,16 +89,16 @@ const vueLaslModal: typeof VueLastModal = {
         buttons: [
           {
             className: config.buttonClassName,
-            label: confirmLabel || '',
-          },
-        ],
+            label: confirmLabel || ''
+          }
+        ]
       })
     } as OpenAlertInterface
 
     Vue.prototype.$confirm = function (options) {
       if (typeof options === 'string') {
         options = {
-          message: options,
+          message: options
         }
       }
 
@@ -106,7 +106,7 @@ const vueLaslModal: typeof VueLastModal = {
         title,
         message,
         cancelLabel = config.cancelLabel,
-        confirmLabel = config.confirmLabel,
+        confirmLabel = config.confirmLabel
       } = options
 
       return this.$dialog({
@@ -116,17 +116,17 @@ const vueLaslModal: typeof VueLastModal = {
           {
             className: config.buttonClassName,
             label: cancelLabel || '',
-            value: false,
+            value: false
           },
           {
             className: config.primaryButtonClassName,
             label: confirmLabel || '',
-            value: true,
-          },
-        ],
+            value: true
+          }
+        ]
       })
     } as OpenConfirmInterface
-  },
+  }
 }
 
 export default vueLaslModal

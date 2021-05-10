@@ -31,17 +31,17 @@ export default Vue.extend({
   props: {
     title: {
       type: String,
-      default: '',
+      default: ''
     },
 
     message: {
       type: String,
-      default: '',
+      default: ''
     },
 
     buttons: {
-      type: Array as PropType<Button[]>,
-    },
+      type: Array as PropType<Button[]>
+    }
   },
 
   mounted() {
@@ -50,7 +50,7 @@ export default Vue.extend({
     if (buttons.length) {
       buttons[buttons.length - 1].focus()
     }
-  },
+  }
 })
 </script>
 

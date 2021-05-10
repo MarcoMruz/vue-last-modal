@@ -33,25 +33,25 @@ export default Vue.extend({
   props: {
     title: {
       type: String,
-      default: '',
+      default: ''
     },
 
     hideCloser: {
-      type: Boolean,
+      type: Boolean
     },
 
     scroll: {
-      type: Boolean,
+      type: Boolean
     },
 
     plain: {
-      type: Boolean,
+      type: Boolean
     },
 
     width: {
       type: [Number, String],
-      default: 600,
-    },
+      default: 600
+    }
   },
 
   computed: {
@@ -77,19 +77,19 @@ export default Vue.extend({
       if (maxWidth && maxWidth !== 'auto') {
         return {
           width: '100%',
-          maxWidth,
+          maxWidth
         }
       }
 
       return {}
-    },
+    }
   },
 
   methods: {
     close() {
       this.$root.$emit('LastModal.closeTop')
-    },
-  },
+    }
+  }
 })
 </script>
 
