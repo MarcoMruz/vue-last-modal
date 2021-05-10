@@ -14,12 +14,26 @@
   </modal-layout>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue, { PropType } from 'vue'
+
+import { Button } from 'types'
+
+export default Vue.extend({
   props: {
-    title: String,
-    message: String,
-    buttons: Array,
+    title: {
+      type: String,
+      default: ''
+    },
+
+    message: {
+      type: String,
+      default: ''
+    },
+
+    buttons: {
+      type: Array as PropType<Button[]>
+    }
   },
 
   mounted() {
@@ -29,17 +43,17 @@ export default {
       buttons[buttons.length - 1].focus()
     }
   }
-}
+})
 </script>
 
 <style lang="postcss">
 .ModalLayoutDialog__buttons {
   text-align: right;
   margin-top: 1rem;
-}
 
-.ModalLayoutDialog__buttonWrapper + .ModalLayoutDialog__buttonWrapper {
-  margin-left: .5rem;
+  & > * + * {
+    margin-left: .5rem;
+  }
 }
 </style>
 

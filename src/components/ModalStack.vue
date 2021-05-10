@@ -19,8 +19,11 @@
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+import { Modal, ModalRecord } from 'types'
+
+export default Vue.extend({
   name: "modal-stack",
 
   props: {
@@ -31,27 +34,27 @@ export default {
 
   data() {
     return {
-      sequence: 1,
-      modals: []
+      sequence: 1 as number,
+      modals: [] as ModalRecord[]
     }
   },
 
   computed: {
-    topModal() {
+    topModal(): ModalRecord | null {
       return this.modals.length ? this.modals[this.modals.length - 1] : null
     }
   },
 
   methods: {
-    open(modal) {
-      document.activeElement && document.activeElement.blur()
+    open(modal: Modal) {
+      (document.activeElement as HTMLElement)?.blur()
 
       this.modals.push({
         ...modal, id: this.sequence++
       })
     },
 
-    close(modal, result = undefined) {
+    close(modal: ModalRecord, result: any = undefined) {
       if (!this.modals.find(({id}) => id === modal.id)) {
         return
       }
@@ -71,24 +74,26 @@ export default {
     },
 
     closeTop() {
-      this.close(this.topModal)
+      if (this.topModal) {
+        this.close(this.topModal)
+      }
     },
 
-    closeByEscKey(e) {
+    closeByEscKey(e: KeyboardEvent) {
       if (this.topModal && e.key === "Escape" && !e.defaultPrevented) {
         e.preventDefault()
         this.closeTop()
       }
     },
 
-    closeByBackdropClick(e, modal) {
+    closeByBackdropClick(e: MouseEvent, modal: ModalRecord) {
       if (e.target === e.currentTarget) {
         this.close(modal)
       }
     },
 
-    _getModalInstance(modal) {
-      return this.$refs[`modal_${modal.id}`][0].$children[0]
+    _getModalInstance(modal: ModalRecord) {
+      return (this.$refs[`modal_${modal.id}`] as any) [0].$children[0]
     }
   },
 
@@ -109,7 +114,7 @@ export default {
     this.$root.$off("LastModal.close", this.close)
     this.$root.$off("LastModal.closeTop", this.closeTop)
   }
-}
+})
 </script>
 
 <style lang="postcss">
