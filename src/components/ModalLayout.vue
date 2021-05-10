@@ -1,5 +1,5 @@
 <template>
-    <div class="ModalLayout" :class="{hasHeader, hasFooter, isScrollable, isPlain}" :style="computedStyle">
+    <div class="ModalLayout" :class="{ hasHeader, hasFooter, isScrollable, isPlain }" :style="computedStyle">
       <div class="ModalLayout__close" @click="close()" v-if="!hideCloser">
       </div>
 
@@ -21,18 +21,29 @@
     </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from 'vue'
+
+export default Vue.extend({
   name: "modal-layout",
 
   props: {
-    title: String,
+    title: {
+      type: String,
+      default: ''
+    },
 
-    hideCloser: Boolean,
+    hideCloser: {
+      type: Boolean
+    },
 
-    scroll: Boolean,
+    scroll: {
+      type: Boolean
+    },
 
-    plain: Boolean,
+    plain: {
+      type: Boolean
+    },
 
     width: {
       type: [Number, String],
@@ -41,40 +52,42 @@ export default {
   },
 
   computed: {
-    isScrollable() {
+    isScrollable(): boolean {
       return this.scroll;
     },
 
-    isPlain() {
+    isPlain(): boolean {
       return this.plain;
     },
 
-    hasHeader() {
-      return this.$slots.header || this.title;
+    hasHeader(): boolean {
+      return Boolean(this.$slots.header || this.title);
     },
 
-    hasFooter() {
-      return this.$slots.footer;
+    hasFooter(): boolean {
+      return Boolean(this.$slots.footer);
     },
 
-    computedStyle() {
-      const maxWidth = this.width + (Number(this.width) ? "px" : "");
+    computedStyle(): object {
+      const maxWidth = this.width + (Number(this.width) ? 'px' : '');
 
-      if (maxWidth && maxWidth !== "auto") {
+      if (maxWidth && maxWidth !== 'auto') {
         return {
-          width: "100%",
+          width: '100%',
           maxWidth
         };
       }
+
+      return {}
     }
   },
 
   methods: {
     close() {
-      this.$root.$emit("LastModal.closeTop");
+      this.$root.$emit('LastModal.closeTop');
     }
   }
-};
+});
 </script>
 
 <style lang="postcss">

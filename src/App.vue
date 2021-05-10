@@ -28,12 +28,14 @@
   </div>
 </template>
 
-<script>
-import BasicModal from './modals/BasicModal'
-import PlainModal from './modals/PlainModal'
-import ScrollableModal from './modals/ScrollableModal'
+<script lang="ts">
+import Vue from 'vue';
 
-export default {
+import BasicModal from './modals/BasicModal.vue'
+import PlainModal from './modals/PlainModal.vue'
+import ScrollableModal from './modals/ScrollableModal.vue'
+
+export default Vue.extend({
   methods: {
     open() {
       this.$modal(BasicModal)
@@ -55,7 +57,7 @@ export default {
       this.$modal(ScrollableModal)
     }
   }
-};
+});
 </script>
 
 <style lang="postcss">
