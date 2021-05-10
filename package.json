@@ -5,6 +5,7 @@
   "author": "Matus Duchon",
   "scripts": {
     "serve": "vue-cli-service serve",
+    "prepublishOnly": "yarn build",
     "build": "vue-cli-service build --target lib --name last-modal src/vue-last-modal.ts",
     "lint": "vue-cli-service lint"
   },
