@@ -36,7 +36,7 @@ const vueLaslModal: typeof VueLastModal = {
 
     config = { ...defaultConfig, ...config }
 
-    Vue.component(ModalLayout.name, ModalLayout)
+    Vue.component('modal-layout', ModalLayout)
 
     const createModalStackContainer = (parent: Vue) => {
       const placeholder = document.createElement('div')

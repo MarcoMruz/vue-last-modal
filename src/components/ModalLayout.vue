@@ -28,8 +28,6 @@
 import Vue from 'vue'
 
 export default Vue.extend({
-  name: 'modal-layout',
-
   props: {
     title: {
       type: String,

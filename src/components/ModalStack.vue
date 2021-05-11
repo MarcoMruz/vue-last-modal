@@ -30,8 +30,6 @@ import Vue from 'vue'
 import { Modal, ModalRecord } from 'types'
 
 export default Vue.extend({
-  name: 'modal-stack',
-
   props: {
     config: {
       type: Object
