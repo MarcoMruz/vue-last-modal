@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import App from '@/App.vue'
+import App from './App.vue'
 
-import VueLastModal from '@/vue-last-modal'
+import VueLastModal from './vue-last-modal'
 
 Vue.use(VueLastModal)
 

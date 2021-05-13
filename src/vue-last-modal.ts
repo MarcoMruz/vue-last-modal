@@ -1,8 +1,8 @@
 import { VueConstructor } from 'vue'
 
-import ModalLayoutDialog from '@/components/ModalLayoutDialog.vue'
-import ModalLayout from '@/components/ModalLayout.vue'
-import ModalStack from '@/components/ModalStack.vue'
+import ModalLayoutDialog from './components/ModalLayoutDialog.vue'
+import ModalLayout from './components/ModalLayout.vue'
+import ModalStack from './components/ModalStack.vue'
 import {
   AlertOptions,
   Config,
@@ -11,7 +11,7 @@ import {
   OpenDialogInterface,
   OpenModalInterface,
   VueLastModal
-} from 'types'
+} from '../types'
 
 const defaultConfig: Config = {
   cancelLabel: 'Cancel',

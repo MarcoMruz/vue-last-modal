@@ -6,12 +6,6 @@
     "declaration": true,
     "moduleResolution": "node",
     "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
     "lib": [
       "esnext",
       "dom",

@@ -27,7 +27,7 @@
 <script lang="ts">
 import Vue from 'vue'
 
-import { Modal, ModalRecord } from 'types'
+import { Modal, ModalRecord } from '../../types'
 
 export default Vue.extend({
   props: {

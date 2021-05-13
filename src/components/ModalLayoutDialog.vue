@@ -25,7 +25,7 @@
 <script lang="ts">
 import Vue, { PropType } from 'vue'
 
-import { Button } from 'types'
+import { Button } from '../../types'
 
 export default Vue.extend({
   props: {
