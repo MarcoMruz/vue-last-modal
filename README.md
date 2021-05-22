@@ -85,7 +85,7 @@ This component provides basic functionality and template for your modals.
 - `title` (String) - The title of the modal. Override by `header` slot, if specified. Default: `undefined`.
 - `width` (Number) - (Maximum) width of the the modal.
 - `scroll` (Boolean) - If present, the maximum height of the modal would be the height of current viewport and content would become scrollable. `header` (title) and `footer` slots are kept static.
-- `hide-close` (Boolean) - If present, modal-closing cross icon won't be visible.
+- `hide-closer` (Boolean) - If present, modal-closing cross icon won't be visible.
 - `plain` (Boolean) - If present, no default styles are applied for the modals content.
 
 ### Events
