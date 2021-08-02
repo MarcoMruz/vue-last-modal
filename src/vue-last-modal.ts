@@ -22,7 +22,7 @@ const defaultConfig: Config = {
   modalTransitionName: 'ModalStack__modal'
 }
 
-const vueLaslModal: typeof VueLastModal = {
+const vueLastModal: typeof VueLastModal = {
   _installed: false as boolean,
 
   _container: undefined as Vue | undefined,
@@ -129,4 +129,4 @@ const vueLaslModal: typeof VueLastModal = {
   }
 }
 
-export default vueLaslModal
+export default vueLastModal
