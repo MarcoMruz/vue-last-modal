@@ -87,6 +87,7 @@ This component provides basic functionality and template for your modals.
 - `scroll` (Boolean) - If present, the maximum height of the modal would be the height of current viewport and content would become scrollable. `header` (title) and `footer` slots are kept static.
 - `hide-closer` (Boolean) - If present, modal-closing cross icon won't be visible.
 - `plain` (Boolean) - If present, no default styles are applied for the modals content.
+- `prevent-backdrop-click` (Boolean) - If present, backdrop of modal layout will be disabled and will not close modal when clicked
 
 ### Events
 - `before-close` - If present, this event is fired when closing. A callback method `close` is provided as an `$event` object and the modal won't be closed util it is called. This could be used for handling validations and waiting for some async events to be completed before closing, etc.
